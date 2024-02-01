@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+    robot-go:
+        container_name: robot
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - ROBOT_PORT=${ROBOT_PORT}
+        ports:
+            - '${ROBOT_PORT}:${ROBOT_PORT}'
+        volumes:
+            - .:/app

@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+    api:
+        extends:
+            file: backend/docker-compose.yaml
+            service: api
+        env_file:
+            - ./backend/.env
+
+    mongo:
+        extends:
+            file: backend/docker-compose.yaml
+            service: mongo
+        env_file:
+            - ./backend/.env
+
+    mongo-express:
+        extends:
+            file: backend/docker-compose.yaml
+            service: mongo-express
+        env_file:
+            - ./backend/.env
+    
+    robot-go:
+        extends:
+            file: robot/docker-compose.yaml
+            service: robot-go
+        env_file:
+            - ./robot/.env

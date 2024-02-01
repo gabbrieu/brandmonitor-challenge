@@ -1,8 +1,10 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
     FastifyAdapter,
     NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
@@ -10,7 +12,20 @@ async function bootstrap(): Promise<void> {
         AppModule,
         new FastifyAdapter()
     );
-    await app.listen(process.env.PORT || 3000);
+
+    app.useGlobalPipes(new ValidationPipe()).enableCors();
+
+    const config = new DocumentBuilder()
+        .setTitle('Google search')
+        .setDescription('Google search API scrapping')
+        .setVersion('1.0')
+        .build();
+
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document);
+
+    const API_PORT = Number(process.env.API_PORT) || 3000;
+    await app.listen(API_PORT, '0.0.0.0');
 }
 
 bootstrap();
