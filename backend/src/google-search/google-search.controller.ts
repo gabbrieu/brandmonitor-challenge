@@ -2,6 +2,7 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GoogleSearchResearchRequestDTO } from './dto/request/google-search-research-request.dto';
 import { GoogleSearchService } from './google-search.service';
+import { GoogleSearchDocument } from './google-search.schema';
 
 @ApiTags('Google Search')
 @Controller('google-search')
@@ -25,7 +26,9 @@ export class GoogleSearchController {
         status: 500,
         description: 'Internal problem',
     })
-    search(@Body() searchBodyDTO: GoogleSearchResearchRequestDTO) {
+    search(
+        @Body() searchBodyDTO: GoogleSearchResearchRequestDTO
+    ): Promise<GoogleSearchDocument> {
         return this.googleSearchService.search(searchBodyDTO);
     }
 }

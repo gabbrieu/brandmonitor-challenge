@@ -8,9 +8,10 @@ import { GoogleSearchModule } from './google-search/google-search.module';
         ConfigModule.forRoot({
             isGlobal: true,
             cache: true,
-            envFilePath: '../../.env',
         }),
-        MongooseModule.forRoot(`mongodb://mongo:27017`),
+        MongooseModule.forRoot(
+            `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@mongo:27017`
+        ),
         GoogleSearchModule,
     ],
     controllers: [],

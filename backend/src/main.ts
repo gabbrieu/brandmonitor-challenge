@@ -13,7 +13,7 @@ async function bootstrap(): Promise<void> {
         new FastifyAdapter()
     );
 
-    app.useGlobalPipes(new ValidationPipe()).enableCors();
+    app.useGlobalPipes(new ValidationPipe({ transform: true })).enableCors();
 
     const config = new DocumentBuilder()
         .setTitle('Google search')

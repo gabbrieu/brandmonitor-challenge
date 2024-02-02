@@ -6,7 +6,8 @@ import { AxiosError } from 'axios';
 import { Model } from 'mongoose';
 import { catchError, lastValueFrom } from 'rxjs';
 import { GoogleSearchResearchRequestDTO } from './dto/request/google-search-research-request.dto';
-import { GoogleSearch } from './google-search.schema';
+import { GoogleSearch, GoogleSearchDocument } from './google-search.schema';
+import { RobotResponse } from './dto/response/robot-response.dto';
 
 @Injectable()
 export class GoogleSearchService {
@@ -17,25 +18,46 @@ export class GoogleSearchService {
         private readonly configService: ConfigService
     ) {}
 
-    async search(searchBodyDTO: GoogleSearchResearchRequestDTO) {
-        const data = await this._sendToGo(searchBodyDTO);
-        const created = new this.googleSearchModel(searchBodyDTO);
+    async search(
+        searchBodyDTO: GoogleSearchResearchRequestDTO
+    ): Promise<GoogleSearchDocument> {
+        searchBodyDTO.keywords = this._parseKeywords(searchBodyDTO.keywords);
 
-        return created.save();
+        const data: RobotResponse = await this._sendToGo(searchBodyDTO);
+        const document: GoogleSearchDocument = new this.googleSearchModel({
+            ...searchBodyDTO,
+            results: data,
+        });
+
+        return document.save();
     }
 
-    private async _sendToGo(searchBodyDTO: GoogleSearchResearchRequestDTO) {
-        const baseGoURL: string = this.configService.get<string>('BASE_GO_URL');
+    private async _sendToGo(
+        searchBodyDTO: GoogleSearchResearchRequestDTO
+    ): Promise<RobotResponse> {
+        const robotPort: string = this.configService.get<string>('ROBOT_PORT');
 
         const { data } = await lastValueFrom(
-            this.httpService.post(`${baseGoURL}/scraping`, searchBodyDTO).pipe(
-                catchError((error: AxiosError) => {
-                    console.error(error);
-                    throw error.message;
-                })
-            )
+            this.httpService
+                .post<RobotResponse>(
+                    `http://robot:${robotPort}/scraping`,
+                    searchBodyDTO
+                )
+                .pipe(
+                    catchError((error: AxiosError) => {
+                        console.error(error);
+                        throw error.message;
+                    })
+                )
         );
 
         return data;
+    }
+
+    private _parseKeywords(keywords: string): string {
+        return keywords
+            .split(';')
+            .map((k: string) => k.trim())
+            .join('+');
     }
 }
