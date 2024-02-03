@@ -1,11 +1,17 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+    ApiExtraModels,
+    ApiOperation,
+    ApiResponse,
+    ApiTags,
+} from '@nestjs/swagger';
 import { GoogleSearchResearchRequestDTO } from './dto/request/google-search-research-request.dto';
 import { GoogleSearchService } from './google-search.service';
-import { GoogleSearchDocument } from './google-search.schema';
+import { GoogleSearch, GoogleSearchDocument } from './google-search.schema';
 
 @ApiTags('Google Search')
 @Controller('google-search')
+@ApiExtraModels(GoogleSearch)
 export class GoogleSearchController {
     constructor(private readonly googleSearchService: GoogleSearchService) {}
 

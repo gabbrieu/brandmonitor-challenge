@@ -6,8 +6,8 @@ import { AxiosError } from 'axios';
 import { Model } from 'mongoose';
 import { catchError, lastValueFrom } from 'rxjs';
 import { GoogleSearchResearchRequestDTO } from './dto/request/google-search-research-request.dto';
+import { RobotResponseDTO } from './dto/response/robot-response.dto';
 import { GoogleSearch, GoogleSearchDocument } from './google-search.schema';
-import { RobotResponse } from './dto/response/robot-response.dto';
 
 @Injectable()
 export class GoogleSearchService {
@@ -23,23 +23,24 @@ export class GoogleSearchService {
     ): Promise<GoogleSearchDocument> {
         searchBodyDTO.keywords = this._parseKeywords(searchBodyDTO.keywords);
 
-        const data: RobotResponse = await this._sendToGo(searchBodyDTO);
-        const document: GoogleSearchDocument = new this.googleSearchModel({
-            ...searchBodyDTO,
-            results: data,
-        });
+        const data: RobotResponseDTO = await this._sendToGo(searchBodyDTO);
+        const document: GoogleSearchDocument =
+            await this.googleSearchModel.create({
+                ...searchBodyDTO,
+                results: data,
+            });
 
         return document.save();
     }
 
     private async _sendToGo(
         searchBodyDTO: GoogleSearchResearchRequestDTO
-    ): Promise<RobotResponse> {
+    ): Promise<RobotResponseDTO> {
         const robotPort: string = this.configService.get<string>('ROBOT_PORT');
 
         const { data } = await lastValueFrom(
             this.httpService
-                .post<RobotResponse>(
+                .post<RobotResponseDTO>(
                     `http://robot:${robotPort}/scraping`,
                     searchBodyDTO
                 )
