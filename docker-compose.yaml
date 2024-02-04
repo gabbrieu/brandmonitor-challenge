@@ -17,6 +17,20 @@ services:
         volumes:
             - ./backend:/app
 
+    application:
+        container_name: application
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+            args:
+                - FRONTEND_PORT=${FRONTEND_PORT}
+        restart: unless-stopped
+        env_file: .env
+        ports:
+            - '${FRONTEND_PORT}:${FRONTEND_PORT}'
+        volumes:
+            - ./frontend:/app
+
     mongo:
         container_name: mongo
         image: mongo

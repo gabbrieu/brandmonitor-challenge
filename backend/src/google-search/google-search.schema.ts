@@ -5,9 +5,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
     IsArray,
     IsDefined,
-    IsNumber,
+    IsInt,
     IsString,
     Matches,
+    Min,
 } from 'class-validator';
 
 @Schema()
@@ -18,7 +19,8 @@ export class GoogleSearch {
         description: 'Quantity of results to be saved',
         example: 2,
     })
-    @IsNumber()
+    @IsInt()
+    @Min(0)
     @IsDefined()
     frequency: number;
 
