@@ -16,7 +16,7 @@
 
 ## Rodando a aplicação
 
-Para rodar a aplicação, execute o seguinte comando:
+Para rodar a aplicação, execute o seguinte comando a partir da pasta raíz do projeto:
 
 ```bash
 docker compose up -d
