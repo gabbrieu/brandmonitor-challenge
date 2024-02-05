@@ -12,7 +12,7 @@
 
 ## Começando
 
-1. Para rodar localmente, crie um arquivo .env na raiz da pasta seguindo o exemplo do arquivo `.env.example`.
+1. Para rodar localmente, crie um arquivo .env na raiz da pasta seguindo o exemplo do arquivo `.env.example`. Mais informações sobre cada variável de ambiente estão localizadas no README específico de cada projeto (backend, frontend, robot).
 
 ## Rodando a aplicação
 
