@@ -2,9 +2,9 @@
 
 ## Tecnologias
 
-- Frontend: React
-- Backend: NestJS + MongoDB
-- Robot: Go
+- Frontend: [React](https://react.dev/) + [Material UI](https://mui.com/)
+- Backend: [NestJS](https://nestjs.com/) + [MongoDB](https://www.mongodb.com/pt-br) com [Mongoose](https://mongoosejs.com/)
+- Robot: [Go](https://go.dev/)
 
 ## Pré-requisitos
 
