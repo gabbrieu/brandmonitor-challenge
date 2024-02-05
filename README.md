@@ -3,7 +3,7 @@
 ## Tecnologias
 
 - Frontend: [React](https://react.dev/) + [Material UI](https://mui.com/)
-- Backend: [NestJS](https://nestjs.com/) + [MongoDB](https://www.mongodb.com/pt-br) com [Mongoose](https://mongoosejs.com/)
+- Backend: [NestJS](https://nestjs.com/) + [MongoDB](https://www.mongodb.com/pt-br) com [Mongoose](https://mongoosejs.com/) + [Swagger](https://swagger.io/)
 - Robot: [Go](https://go.dev/)
 
 ## Pré-requisitos
@@ -30,6 +30,10 @@ yarn test:cov
 ```
 
 O comando executará os testes e retornará o coverage da API.
+
+## Documentação
+
+A documentação feita com Swagger da API está no seguinte endpoint: `localhost:${API_PORT}/api`
 
 
 ## Principais pastas
