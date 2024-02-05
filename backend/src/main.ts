@@ -16,8 +16,8 @@ async function bootstrap(): Promise<void> {
     app.useGlobalPipes(new ValidationPipe({ transform: true })).enableCors();
 
     const config = new DocumentBuilder()
-        .setTitle('Google search')
-        .setDescription('Google search API scrapping')
+        .setTitle('Google Search')
+        .setDescription('Google Search API scraping')
         .setVersion('1.0')
         .build();
 
