@@ -42,6 +42,7 @@ Pasta que contém os arquivos em Golang na qual são responsáveis pelo scraping
 -   Página do frontend com os campos da pesquisa - `localhost:${FRONTEND_PORT}`
 -   Endpoint do backend responsável pelo processamento da pesquisa - POST `localhost:${API_PORT}/google-search`
 -   Endpoint do robô responsável pelo scraping dos dados - POST `localhost:${ROBOT_PORT}/scraping`
+-   Mongo Express, aplicação para visualização dos dados armazenados no MongoDB - `localhost:8081`
 
 
-O frontend é responsável pelos campos de pesquisa (Palavras-chave, frequência e localização). Os campos são enviados para o backend na qual encaminha para o robô em Go. O robô faz o trabalho do scraping no google de acordo com os campos inseridos pelo o usuário e retorna os dados para o backend. O backend salva então os resultados no MongoDB e retorna os resultados para a aplicação frontend para exibir para o usuário final.
+O frontend é responsável pelos campos de pesquisa (Palavras-chave, frequência e localização). Os campos são enviados para o backend na qual encaminha para o robô em Go. O robô faz o trabalho do scraping no google de acordo com os campos inseridos pelo o usuário e retorna os dados (título das pesquisas do google) para o backend. O backend salva então os resultados no MongoDB e retorna os resultados para a aplicação frontend para exibir para o usuário final.
