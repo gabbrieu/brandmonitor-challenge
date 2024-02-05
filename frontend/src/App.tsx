@@ -64,7 +64,7 @@ export default function App(): JSX.Element {
             <h1>Google Search Scraper</h1>
             <Box
                 component="form"
-                sx={{ width: '45%', minWidth: '350px' }}
+                sx={{ width: '45%', minWidth: '21.875rem' }}
                 onSubmit={handleSubmit}
             >
                 <TextField
@@ -125,7 +125,7 @@ export default function App(): JSX.Element {
             </Box>
 
             {response && (
-                <ShowResults sx={{ mt: '5rem' }} results={response.results} />
+                <ShowResults sx={{ mt: '5rem', maxHeight: '6.25rem' }} results={response.results} />
             )}
         </main>
     );
