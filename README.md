@@ -45,7 +45,7 @@ Pasta que contém os arquivos responsáveis pelo backend que repassam os inputs 
 
 ### `robot/`
 
-Pasta que contém os arquivos em Golang na qual são responsáveis pelo scraping da pesquisa no Google.
+Pasta que contém os arquivos em Go na qual são responsáveis pelo scraping da pesquisa no Google.
 
 ## Endpoints
 
