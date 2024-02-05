@@ -2,7 +2,7 @@
 
 ## Tecnologias
 
-- Frontend: ReactJS
+- Frontend: React
 - Backend: NestJS + MongoDB
 - Robot: Go
 
