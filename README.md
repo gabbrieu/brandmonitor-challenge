@@ -22,16 +22,26 @@ Para rodar a aplicação, execute o seguinte comando a partir da pasta raíz do 
 docker compose up -d
 ```
 
+## Testes
+
+Para rodar os testes entre na pasta backend e execute o seguinte comando: 
+```bash
+yarn test:cov
+```
+
+O comando executará os testes e retornará o coverage da API.
+
+
 ## Principais pastas
 
-
-### `backend/`
-
-Pasta que contém os arquivos responsáveis pelo backend que repassam os inputs inseridos do usuário para o Go, pega o result gerado e grava no MongoDB.
 
 ### `frontend/`
 
 Pasta que contém os arquivos do frontend na qual o usuário insere os inputs necessários para a pesquisa do google.
+
+### `backend/`
+
+Pasta que contém os arquivos responsáveis pelo backend que repassam os inputs inseridos do usuário para o Go, pega o result gerado, grava no MongoDB e retorna o resultado para o frontend exibir para o usuário.
 
 ### `robot/`
 
